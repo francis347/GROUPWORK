@@ -1,0 +1,96 @@
+/* PARKING GARAGE SYSTEM 
+This parking garage management system written in C.
+ It uses a two-dimensional array to represent parking spaces across three floors,with four sections on each floor.
+ Each space can either be empty (represented by 0)or occupied (represented by 1)*/
+
+#include <stdio.h> // Preprocessor directive
+
+#define FLOORS 3
+#define SECTIONS 4
+
+// Function prototypes
+void initializeGarage(int garage[FLOORS][SECTIONS]);
+void displayGarage(int garage[FLOORS][SECTIONS]);
+int findAvailableSpace(int garage[FLOORS][SECTIONS], int *floor, int *section);
+void parkVehicle(int garage[FLOORS][SECTIONS]);
+
+int main() {
+    int garage[FLOORS][SECTIONS];
+    initializeGarage(garage);
+
+    int choice;
+    do {
+        printf("\nParking Garage Menu:\n");
+        printf("1. Display Garage\n");
+        printf("2. Park Vehicle\n");
+        printf("3. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch(choice) {
+            case 1:
+                displayGarage(garage);
+                break;
+            case 2:
+                parkVehicle(garage);
+                break;
+            case 3:
+                printf("Exiting...\n");
+                break;
+            default:
+                printf("Invalid choice. Please try again.\n");
+        }
+    } while(choice != 3);
+
+    return 0;
+}
+
+// Initialize the parking garage with all spots available (0 means available, 1 means occupied)
+void initializeGarage(int garage[FLOORS][SECTIONS]) {
+    for(int i = 0; i < FLOORS; i++) {
+        for(int j = 0; j < SECTIONS; j++) {
+            garage[i][j] = 0;
+        }
+    }
+}
+
+// Display the current state of the parking garage
+void displayGarage(int garage[FLOORS][SECTIONS]) {
+    printf("\nParking Garage Status (0 = Available, 1 = Occupied):\n");
+    for(int i = 0; i < FLOORS; i++) {
+        for(int j = 0; j < SECTIONS; j++) {
+            printf("%d ", garage[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+// Find the first available parking space
+int findAvailableSpace(int garage[FLOORS][SECTIONS], int *floor, int *section) {
+    for(int i = 0; i < FLOORS; i++) {
+        for(int j = 0; j < SECTIONS; j++) {
+            if(garage[i][j] == 0) {
+                *floor = i;
+                *section = j;
+                return 1; // Space found
+            }
+        }
+    }
+    return -1; // Garage is full
+}
+
+// Park a vehicle in the first available space
+void parkVehicle(int garage[FLOORS][SECTIONS]) {
+    int floor, section;
+    if(findAvailableSpace(garage, &floor, &section) == 1) {
+        garage[floor][section] = 1;
+        printf("Vehicle parked at Floor %d, Section %d\n", floor, section);
+    } else {
+        printf("Garage is full. No available parking spaces.\n");
+    }
+}
+
+
+
+
+    
