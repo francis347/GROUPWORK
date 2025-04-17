@@ -89,7 +89,11 @@ void parkVehicle(int garage[FLOORS][SECTIONS]) {
         printf("Garage is full. No available parking spaces.\n");
     }
 }
-
+/* TUMUSIIME FRANCIS XAVIER 2024/DCS/DAY/1719/G
+   KIGGUNDU ALOYSIOUS 2024/DCS/DAY/1600
+   MUSIKA OWEN 2024/DCS/DAY/2020/G
+   MFURA RAPHA 2024/DCS/DAY/0845
+   MUKISA NICHOLAS 2024/DCS/DAY/0357*/
 
 
 
